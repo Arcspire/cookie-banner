@@ -1,4 +1,4 @@
-import './cookie-banner.sass'
+import './cookie-banner.css'
 
 const removeBanner = (fullScreen) => {
     let elem = document.getElementById(`cb-banner`)
@@ -9,29 +9,34 @@ const removeBanner = (fullScreen) => {
 }
 
 const defaultOptions = {
-    text = `This website uses cookies. By clicking 'Accept' you agree to our use of cookies.`,
-    acceptText = `Accept`,
-    rejectText = `Reject`,
-    moreText = `More Info`,
-    preferencesText = `Preferences`,
-    overlayTheme = `dark`,
-    bannerTheme = `light`,
-    preferencesAcceptText = `Accept`,
+    text: `This website uses cookies. By clicking 'Accept' you agree to our use of cookies.`,
+    acceptText: `Accept`,
+    rejectText: `Reject`,
+    moreText: `More Info`,
+    preferencesText: `Preferences`,
+    overlayTheme: `dark`,
+    bannerTheme: `light`,
+    preferencesAcceptText: `Accept`,
 }
 
-const cookieBanner = (
-    {
-        ...defaultOptions,
-        title,
-        onAccept,
-        onReject,
-        onMore,
-        fullScreen,
-        parentClass,
-        preferences,
-        onPreferencesAccept,
-    } = defaultOptions
-) => {
+const cookieBanner = ({
+    text = defaultOptions.text,
+    acceptText = defaultOptions.acceptText,
+    rejectText = defaultOptions.rejectText,
+    moreText = defaultOptions.moreText,
+    preferencesText = defaultOptions.preferencesText,
+    overlayTheme = defaultOptions.overlayTheme,
+    bannerTheme = defaultOptions.bannerTheme,
+    preferencesAcceptText = defaultOptions.preferencesAcceptText,
+    title,
+    onAccept,
+    onReject,
+    onMore,
+    fullScreen,
+    parentClass,
+    preferences,
+    onPreferencesAccept,
+} = defaultOptions) => {
     const cookiesAllowed = localStorage.getItem(`cb-cookiesAllowed`) === `true`
 
     // if cookies have already been allowed, no need to render banner

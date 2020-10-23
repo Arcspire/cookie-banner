@@ -44,38 +44,43 @@
     elem.parentNode.removeChild(elem);
   };
 
+  var defaultOptions = {
+    text: "This website uses cookies. By clicking 'Accept' you agree to our use of cookies.",
+    acceptText: "Accept",
+    rejectText: "Reject",
+    moreText: "More Info",
+    preferencesText: "Preferences",
+    overlayTheme: "dark",
+    bannerTheme: "light",
+    preferencesAcceptText: "Accept"
+  };
+
   var cookieBanner = function cookieBanner() {
-    var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
-      text: "This website uses cookies. By clicking 'Accept' you agree to our use of cookies.",
-      acceptText: "Accept",
-      rejectText: "Reject",
-      overlayTheme: "dark",
-      bannerTheme: "light"
-    },
-        title = _ref.title,
+    var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultOptions,
         _ref$text = _ref.text,
-        text = _ref$text === void 0 ? "This website uses cookies. By clicking 'Accept' you agree to our use of cookies." : _ref$text,
+        text = _ref$text === void 0 ? defaultOptions.text : _ref$text,
         _ref$acceptText = _ref.acceptText,
-        acceptText = _ref$acceptText === void 0 ? "Accept" : _ref$acceptText,
+        acceptText = _ref$acceptText === void 0 ? defaultOptions.acceptText : _ref$acceptText,
         _ref$rejectText = _ref.rejectText,
-        rejectText = _ref$rejectText === void 0 ? "Reject" : _ref$rejectText,
+        rejectText = _ref$rejectText === void 0 ? defaultOptions.rejectText : _ref$rejectText,
         _ref$moreText = _ref.moreText,
-        moreText = _ref$moreText === void 0 ? "More Info" : _ref$moreText,
+        moreText = _ref$moreText === void 0 ? defaultOptions.moreText : _ref$moreText,
         _ref$preferencesText = _ref.preferencesText,
-        preferencesText = _ref$preferencesText === void 0 ? "Preferences" : _ref$preferencesText,
+        preferencesText = _ref$preferencesText === void 0 ? defaultOptions.preferencesText : _ref$preferencesText,
+        _ref$overlayTheme = _ref.overlayTheme,
+        overlayTheme = _ref$overlayTheme === void 0 ? defaultOptions.overlayTheme : _ref$overlayTheme,
+        _ref$bannerTheme = _ref.bannerTheme,
+        bannerTheme = _ref$bannerTheme === void 0 ? defaultOptions.bannerTheme : _ref$bannerTheme,
+        _ref$preferencesAccep = _ref.preferencesAcceptText,
+        preferencesAcceptText = _ref$preferencesAccep === void 0 ? defaultOptions.preferencesAcceptText : _ref$preferencesAccep,
+        title = _ref.title,
         onAccept = _ref.onAccept,
         onReject = _ref.onReject,
         onMore = _ref.onMore,
         fullScreen = _ref.fullScreen,
-        _ref$overlayTheme = _ref.overlayTheme,
-        overlayTheme = _ref$overlayTheme === void 0 ? "dark" : _ref$overlayTheme,
-        _ref$bannerTheme = _ref.bannerTheme,
-        bannerTheme = _ref$bannerTheme === void 0 ? "light" : _ref$bannerTheme,
         parentClass = _ref.parentClass,
         preferences = _ref.preferences,
-        onPreferencesAccept = _ref.onPreferencesAccept,
-        _ref$preferencesAccep = _ref.preferencesAcceptText,
-        preferencesAcceptText = _ref$preferencesAccep === void 0 ? "Accept" : _ref$preferencesAccep;
+        onPreferencesAccept = _ref.onPreferencesAccept;
 
     var cookiesAllowed = localStorage.getItem("cb-cookiesAllowed") === "true"; // if cookies have already been allowed, no need to render banner
 
