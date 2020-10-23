@@ -16,7 +16,7 @@ const defaultOptions = {
     preferencesText: `Preferences`,
     overlayTheme: `dark`,
     bannerTheme: `light`,
-    preferencesAcceptText: `Accept`,
+    preferencesSaveText: `Save`,
 }
 
 const cookieBanner = ({
@@ -27,7 +27,7 @@ const cookieBanner = ({
     preferencesText = defaultOptions.preferencesText,
     overlayTheme = defaultOptions.overlayTheme,
     bannerTheme = defaultOptions.bannerTheme,
-    preferencesAcceptText = defaultOptions.preferencesAcceptText,
+    preferencesSaveText = defaultOptions.preferencesSaveText,
     title,
     onAccept,
     onReject,
@@ -35,7 +35,7 @@ const cookieBanner = ({
     fullScreen,
     parentClass,
     preferences,
-    onPreferencesAccept,
+    onPreferencesSave,
 } = defaultOptions) => {
     const cookiesAllowed = localStorage.getItem(`cb-cookiesAllowed`) === `true`
 
@@ -55,22 +55,16 @@ const cookieBanner = ({
                         ${
                             preferences
                                 ? `
-                                <form id='cb-preferences-form'>
+                                <form id='cb-preferences-checkboxes'>
                                     ${preferences
                                         .map(
                                             (p) =>
                                                 `<label>
-                                        <input type="checkbox" name="${p.name}" checked="false" />
+                                        <input type="checkbox" name="${p.name}" defaultChecked="false" />
                                         <span>${p.label}</span>
                                     </label>`
                                         )
                                         .join(``)}
-                                    <button
-                                        type='submit'
-                                        id='cb-preferences-accept'
-                                    >
-                                        ${preferencesAcceptText}
-                                    </button>
                                 </form>
                             `
                                 : ``
@@ -119,29 +113,26 @@ const cookieBanner = ({
 
         if (preferences) {
             const preferencesButton = document.getElementById(`cb-preferences`)
-            preferencesButton.addEventListener(`click`, () => {
-                const preferencesForm = document.getElementById(
-                    `cb-preferences-form`
-                )
-                if (preferencesForm.style.display !== `grid`) {
-                    preferencesForm.style.display = `grid`
-                    document.getElementById(`cb-accept`).textContent += ' All'
-                    document.getElementById(`cb-reject`).textContent += ' All'
-                }
-            })
-
-            const preferencesForm = document.getElementById(
-                `cb-preferences-form`
+            const preferencesCheckboxes = document.getElementById(
+                `cb-preferences-checkboxes`
             )
-            preferencesForm.addEventListener(`submit`, (e) => {
-                e.preventDefault()
-                const values = {}
-                preferences.forEach((p) => {
-                    values[p.name] = preferencesForm.elements[p.name].checked
-                })
-                removeBanner(fullScreen)
-                localStorage.setItem(`cb-cookiesAllowed`, true)
-                onPreferencesAccept && onPreferencesAccept(values)
+
+            preferencesButton.addEventListener(`click`, () => {
+                if (preferencesCheckboxes.style.display !== `grid`) {
+                    preferencesCheckboxes.style.display = `grid`
+                    document.getElementById(`cb-accept`).textContent += ` All`
+                    document.getElementById(`cb-reject`).textContent += ` All`
+                    preferencesButton.textContent = preferencesSaveText
+                } else {
+                    const values = {}
+                    preferences.forEach((p) => {
+                        values[p.name] =
+                            preferencesCheckboxes.elements[p.name].checked
+                    })
+                    removeBanner(fullScreen)
+                    localStorage.setItem(`cb-cookiesAllowed`, true)
+                    onPreferencesSave && onPreferencesSave(values)
+                }
             })
         }
     }

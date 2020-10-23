@@ -125,7 +125,7 @@
     font-size: 0.75rem;
 }
 
-#cb-preferences-form {
+#cb-preferences-checkboxes {
     display: none;
     grid-auto-flow: column;
     grid-auto-columns: max-content;
