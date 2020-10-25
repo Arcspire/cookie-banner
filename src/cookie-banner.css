@@ -92,6 +92,7 @@
     font-size: 100%;
     cursor: pointer;
     line-height: inherit;
+    font-family: inherit;
 }
 
 #cb-accept:hover,

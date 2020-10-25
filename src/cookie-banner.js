@@ -17,6 +17,7 @@ const defaultOptions = {
     overlayTheme: `dark`,
     bannerTheme: `light`,
     preferencesSaveText: `Save`,
+    useLocalStorage: true,
 }
 
 const cookieBanner = ({
@@ -28,6 +29,7 @@ const cookieBanner = ({
     overlayTheme = defaultOptions.overlayTheme,
     bannerTheme = defaultOptions.bannerTheme,
     preferencesSaveText = defaultOptions.preferencesSaveText,
+    useLocalStorage = defaultOptions.useLocalStorage,
     title,
     onAccept,
     onReject,
@@ -37,9 +39,9 @@ const cookieBanner = ({
     preferences,
     onPreferencesSave,
 } = defaultOptions) => {
-    const cookiesAllowed = localStorage.getItem(`cb-cookiesAllowed`) === `true`
-    const cookiePreferences = JSON.parse(localStorage.getItem(`cb-preferences`))
-    console.log('cookiePreferences', cookiePreferences)
+    const storage = !useLocalStorage ? sessionStorage : localStorage
+    const cookiesAllowed = storage.getItem(`cb-cookiesAllowed`) === `true`
+    const cookiePreferences = JSON.parse(storage.getItem(`cb-preferences`))
 
     // if cookies have already been allowed, no need to render banner
     if (!cookiesAllowed) {
@@ -70,7 +72,9 @@ const cookieBanner = ({
                                                         ? `checked`
                                                         : ``
                                                 } />
-                                        <span>${p.label}</span>
+                                        <span style="vertical-align: text-bottom;">${
+                                            p.label
+                                        }</span>
                                     </label>`
                                         )
                                         .join(``)}
@@ -103,7 +107,7 @@ const cookieBanner = ({
         const acceptButton = document.getElementById(`cb-accept`)
         acceptButton.addEventListener(`click`, () => {
             removeBanner(fullScreen)
-            localStorage.setItem(`cb-cookiesAllowed`, true)
+            storage.setItem(`cb-cookiesAllowed`, true)
             onAccept && onAccept()
         })
 
@@ -139,15 +143,11 @@ const cookieBanner = ({
                             preferencesCheckboxes.elements[p.name].checked
                         values[p.name] = checked
 
-                        checked &&
-                            localStorage.setItem(`cb-cookiesAllowed`, true)
+                        checked && storage.setItem(`cb-cookiesAllowed`, true)
                     })
                     removeBanner(fullScreen)
 
-                    localStorage.setItem(
-                        `cb-preferences`,
-                        JSON.stringify(values)
-                    )
+                    storage.setItem(`cb-preferences`, JSON.stringify(values))
                     onPreferencesSave && onPreferencesSave(values)
                 }
             })

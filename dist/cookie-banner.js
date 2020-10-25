@@ -31,7 +31,7 @@
     }
   }
 
-  var css_248z = "#cb-banner,#cb-banner *,#cb-overlay,#cb-overlay *{box-sizing:border-box;margin:0}#cb-banner,#cb-overlay{position:fixed;left:0;display:grid;z-index:999}#cb-overlay{top:0;height:100vh;width:100vw}#cb-overlay.cb-light{background-color:hsla(0,0%,100%,.75)}#cb-overlay.cb-dark{background-color:rgba(0,0,0,.75)}#cb-overlay #cb-banner{position:relative;justify-self:center;align-self:center;margin:0;width:auto;max-width:80%}#cb-banner{--arcspire-navy:#2f455c;--arcspire-green:#62f9a8;--arcspire-red:#fa7061;--margin:1rem;bottom:0;margin:0 0 var(--margin) var(--margin);padding:1rem;border-radius:.375rem;box-shadow:0 20px 25px -5px rgba(0,0,0,.1),0 10px 10px -5px rgba(0,0,0,.04);font-size:.75rem;line-height:2;gap:.5rem;width:calc(100% - var(--margin)*2)}#cb-banner.cb-light{background-color:#f7fafc}#cb-banner.cb-dark{background-color:#292929;color:#f7fafc}#cb-title{font-size:1rem}#cb-buttons{display:grid;gap:.5rem}#cb-accept,#cb-more,#cb-preferences,#cb-preferences-accept,#cb-reject{border-radius:.375rem;padding:.5rem 1rem;font-weight:700;box-shadow:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -2px rgba(0,0,0,.05);transition:box-shadow .2s cubic-bezier(.4,0,.2,1);text-decoration:none;text-align:center;display:grid;align-items:center;outline:none;border:none;font-size:100%;cursor:pointer;line-height:inherit}#cb-accept:hover,#cb-more:hover,#cb-preferences-accept:hover,#cb-preferences:hover,#cb-reject:hover{box-shadow:0 1px 3px 0 rgba(0,0,0,.1),0 1px 2px 0 rgba(0,0,0,.06)}#cb-accept,#cb-preferences-accept{background-color:var(--arcspire-green);color:var(--arcspire-navy)}#cb-reject{background-color:var(--arcspire-red);color:var(--arcspire-navy)}#cb-more{background-color:var(--arcspire-navy);color:#f7fafc}#cb-preferences-accept{padding:.25rem 1rem;font-weight:500;font-size:.75rem}#cb-preferences-checkboxes{display:none;grid-auto-flow:column;grid-auto-columns:max-content;align-items:center;gap:10px;margin:10px 0}@media (min-width:768px){#cb-banner{font-size:.875rem;line-height:1.625}#cb-buttons{grid-auto-flow:column}}@media (min-width:1024px){#cb-banner{grid-auto-flow:column;align-items:center}#cb-overlay #cb-banner{grid-auto-flow:row}}";
+  var css_248z = "#cb-banner,#cb-banner *,#cb-overlay,#cb-overlay *{box-sizing:border-box;margin:0}#cb-banner,#cb-overlay{position:fixed;left:0;display:grid;z-index:999}#cb-overlay{top:0;height:100vh;width:100vw}#cb-overlay.cb-light{background-color:hsla(0,0%,100%,.75)}#cb-overlay.cb-dark{background-color:rgba(0,0,0,.75)}#cb-overlay #cb-banner{position:relative;justify-self:center;align-self:center;margin:0;width:auto;max-width:80%}#cb-banner{--arcspire-navy:#2f455c;--arcspire-green:#62f9a8;--arcspire-red:#fa7061;--margin:1rem;bottom:0;margin:0 0 var(--margin) var(--margin);padding:1rem;border-radius:.375rem;box-shadow:0 20px 25px -5px rgba(0,0,0,.1),0 10px 10px -5px rgba(0,0,0,.04);font-size:.75rem;line-height:2;gap:.5rem;width:calc(100% - var(--margin)*2)}#cb-banner.cb-light{background-color:#f7fafc}#cb-banner.cb-dark{background-color:#292929;color:#f7fafc}#cb-title{font-size:1rem}#cb-buttons{display:grid;gap:.5rem}#cb-accept,#cb-more,#cb-preferences,#cb-preferences-accept,#cb-reject{border-radius:.375rem;padding:.5rem 1rem;font-weight:700;box-shadow:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -2px rgba(0,0,0,.05);transition:box-shadow .2s cubic-bezier(.4,0,.2,1);text-decoration:none;text-align:center;display:grid;align-items:center;outline:none;border:none;font-size:100%;cursor:pointer;line-height:inherit;font-family:inherit}#cb-accept:hover,#cb-more:hover,#cb-preferences-accept:hover,#cb-preferences:hover,#cb-reject:hover{box-shadow:0 1px 3px 0 rgba(0,0,0,.1),0 1px 2px 0 rgba(0,0,0,.06)}#cb-accept,#cb-preferences-accept{background-color:var(--arcspire-green);color:var(--arcspire-navy)}#cb-reject{background-color:var(--arcspire-red);color:var(--arcspire-navy)}#cb-more{background-color:var(--arcspire-navy);color:#f7fafc}#cb-preferences-accept{padding:.25rem 1rem;font-weight:500;font-size:.75rem}#cb-preferences-checkboxes{display:none;grid-auto-flow:column;grid-auto-columns:max-content;align-items:center;gap:10px;margin:10px 0}@media (min-width:768px){#cb-banner{font-size:.875rem;line-height:1.625}#cb-buttons{grid-auto-flow:column}}@media (min-width:1024px){#cb-banner{grid-auto-flow:column;align-items:center}#cb-overlay #cb-banner{grid-auto-flow:row}}";
   styleInject(css_248z);
 
   var removeBanner = function removeBanner(fullScreen) {
@@ -52,7 +52,8 @@
     preferencesText: "Preferences",
     overlayTheme: "dark",
     bannerTheme: "light",
-    preferencesSaveText: "Save"
+    preferencesSaveText: "Save",
+    useLocalStorage: true
   };
 
   var cookieBanner = function cookieBanner() {
@@ -73,6 +74,8 @@
         bannerTheme = _ref$bannerTheme === void 0 ? defaultOptions.bannerTheme : _ref$bannerTheme,
         _ref$preferencesSaveT = _ref.preferencesSaveText,
         preferencesSaveText = _ref$preferencesSaveT === void 0 ? defaultOptions.preferencesSaveText : _ref$preferencesSaveT,
+        _ref$useLocalStorage = _ref.useLocalStorage,
+        useLocalStorage = _ref$useLocalStorage === void 0 ? defaultOptions.useLocalStorage : _ref$useLocalStorage,
         title = _ref.title,
         onAccept = _ref.onAccept,
         onReject = _ref.onReject,
@@ -82,20 +85,20 @@
         preferences = _ref.preferences,
         onPreferencesSave = _ref.onPreferencesSave;
 
-    var cookiesAllowed = localStorage.getItem("cb-cookiesAllowed") === "true";
-    var cookiePreferences = JSON.parse(localStorage.getItem("cb-preferences"));
-    console.log('cookiePreferences', cookiePreferences); // if cookies have already been allowed, no need to render banner
+    var storage = !useLocalStorage ? sessionStorage : localStorage;
+    var cookiesAllowed = storage.getItem("cb-cookiesAllowed") === "true";
+    var cookiePreferences = JSON.parse(storage.getItem("cb-preferences")); // if cookies have already been allowed, no need to render banner
 
     if (!cookiesAllowed) {
       var html = "\n                ".concat(parentClass ? "<div class=\"".concat(parentClass, "\">") : "", "\n                ").concat(fullScreen ? "<div id=\"cb-overlay\" class=\"cb-".concat(overlayTheme, "\">") : "", "\n                <div id=\"cb-banner\" class=\"cb-").concat(bannerTheme, "\">\n                    <div>\n                        ").concat(title ? "<h2 id=\"cb-title\">".concat(title, "</h2>") : "", "\n                        <p id=\"cb-text\">").concat(text, "</p>\n                        ").concat(preferences ? "\n                                <form id='cb-preferences-checkboxes'>\n                                    ".concat(preferences.map(function (p) {
-        return "<label>\n                                        <input type=\"checkbox\" name=\"".concat(p.name, "\" ").concat(cookiePreferences && cookiePreferences[p.name] ? "checked" : "", " />\n                                        <span>").concat(p.label, "</span>\n                                    </label>");
+        return "<label>\n                                        <input type=\"checkbox\" name=\"".concat(p.name, "\" ").concat(cookiePreferences && cookiePreferences[p.name] ? "checked" : "", " />\n                                        <span style=\"vertical-align: text-bottom;\">").concat(p.label, "</span>\n                                    </label>");
       }).join(""), "\n                                </form>\n                            ") : "", "\n                        </div>\n                    <div id=\"cb-buttons\">\n                        <button id=\"cb-accept\">").concat(acceptText, "</button>\n                        <button id=\"cb-reject\">").concat(rejectText, "</button>\n                        ").concat(onMore ? "<button id=\"cb-more\">".concat(moreText, "</button>") : "", "\n                        ").concat(preferences ? "<button id=\"cb-preferences\">".concat(preferencesText, "</button>") : "", "\n                    </div>\n                </div>\n                ").concat(fullScreen ? "</div>" : "", "\n                ").concat(parentClass ? "</div>" : "", "\n            ");
       var div = document.querySelector("body");
       div.insertAdjacentHTML("beforeend", html);
       var acceptButton = document.getElementById("cb-accept");
       acceptButton.addEventListener("click", function () {
         removeBanner(fullScreen);
-        localStorage.setItem("cb-cookiesAllowed", true);
+        storage.setItem("cb-cookiesAllowed", true);
         onAccept && onAccept();
       });
       var rejectButton = document.getElementById("cb-reject");
@@ -125,10 +128,10 @@
             preferences.forEach(function (p) {
               var checked = preferencesCheckboxes.elements[p.name].checked;
               values[p.name] = checked;
-              checked && localStorage.setItem("cb-cookiesAllowed", true);
+              checked && storage.setItem("cb-cookiesAllowed", true);
             });
             removeBanner(fullScreen);
-            localStorage.setItem("cb-preferences", JSON.stringify(values));
+            storage.setItem("cb-preferences", JSON.stringify(values));
             onPreferencesSave && onPreferencesSave(values);
           }
         });
