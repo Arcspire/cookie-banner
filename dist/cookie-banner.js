@@ -82,11 +82,13 @@
         preferences = _ref.preferences,
         onPreferencesSave = _ref.onPreferencesSave;
 
-    var cookiesAllowed = localStorage.getItem("cb-cookiesAllowed") === "true"; // if cookies have already been allowed, no need to render banner
+    var cookiesAllowed = localStorage.getItem("cb-cookiesAllowed") === "true";
+    var cookiePreferences = JSON.parse(localStorage.getItem("cb-preferences"));
+    console.log('cookiePreferences', cookiePreferences); // if cookies have already been allowed, no need to render banner
 
     if (!cookiesAllowed) {
       var html = "\n                ".concat(parentClass ? "<div class=\"".concat(parentClass, "\">") : "", "\n                ").concat(fullScreen ? "<div id=\"cb-overlay\" class=\"cb-".concat(overlayTheme, "\">") : "", "\n                <div id=\"cb-banner\" class=\"cb-").concat(bannerTheme, "\">\n                    <div>\n                        ").concat(title ? "<h2 id=\"cb-title\">".concat(title, "</h2>") : "", "\n                        <p id=\"cb-text\">").concat(text, "</p>\n                        ").concat(preferences ? "\n                                <form id='cb-preferences-checkboxes'>\n                                    ".concat(preferences.map(function (p) {
-        return "<label>\n                                        <input type=\"checkbox\" name=\"".concat(p.name, "\" defaultChecked=\"false\" />\n                                        <span>").concat(p.label, "</span>\n                                    </label>");
+        return "<label>\n                                        <input type=\"checkbox\" name=\"".concat(p.name, "\" ").concat(cookiePreferences && cookiePreferences[p.name] ? "checked" : "", " />\n                                        <span>").concat(p.label, "</span>\n                                    </label>");
       }).join(""), "\n                                </form>\n                            ") : "", "\n                        </div>\n                    <div id=\"cb-buttons\">\n                        <button id=\"cb-accept\">").concat(acceptText, "</button>\n                        <button id=\"cb-reject\">").concat(rejectText, "</button>\n                        ").concat(onMore ? "<button id=\"cb-more\">".concat(moreText, "</button>") : "", "\n                        ").concat(preferences ? "<button id=\"cb-preferences\">".concat(preferencesText, "</button>") : "", "\n                    </div>\n                </div>\n                ").concat(fullScreen ? "</div>" : "", "\n                ").concat(parentClass ? "</div>" : "", "\n            ");
       var div = document.querySelector("body");
       div.insertAdjacentHTML("beforeend", html);
@@ -121,10 +123,12 @@
           } else {
             var values = {};
             preferences.forEach(function (p) {
-              values[p.name] = preferencesCheckboxes.elements[p.name].checked;
+              var checked = preferencesCheckboxes.elements[p.name].checked;
+              values[p.name] = checked;
+              checked && localStorage.setItem("cb-cookiesAllowed", true);
             });
             removeBanner(fullScreen);
-            localStorage.setItem("cb-cookiesAllowed", true);
+            localStorage.setItem("cb-preferences", JSON.stringify(values));
             onPreferencesSave && onPreferencesSave(values);
           }
         });

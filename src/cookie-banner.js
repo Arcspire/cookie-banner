@@ -38,6 +38,8 @@ const cookieBanner = ({
     onPreferencesSave,
 } = defaultOptions) => {
     const cookiesAllowed = localStorage.getItem(`cb-cookiesAllowed`) === `true`
+    const cookiePreferences = JSON.parse(localStorage.getItem(`cb-preferences`))
+    console.log('cookiePreferences', cookiePreferences)
 
     // if cookies have already been allowed, no need to render banner
     if (!cookiesAllowed) {
@@ -60,7 +62,14 @@ const cookieBanner = ({
                                         .map(
                                             (p) =>
                                                 `<label>
-                                        <input type="checkbox" name="${p.name}" defaultChecked="false" />
+                                        <input type="checkbox" name="${
+                                            p.name
+                                        }" ${
+                                                    cookiePreferences &&
+                                                    cookiePreferences[p.name]
+                                                        ? `checked`
+                                                        : ``
+                                                } />
                                         <span>${p.label}</span>
                                     </label>`
                                         )
@@ -126,11 +135,19 @@ const cookieBanner = ({
                 } else {
                     const values = {}
                     preferences.forEach((p) => {
-                        values[p.name] =
+                        const checked =
                             preferencesCheckboxes.elements[p.name].checked
+                        values[p.name] = checked
+
+                        checked &&
+                            localStorage.setItem(`cb-cookiesAllowed`, true)
                     })
                     removeBanner(fullScreen)
-                    localStorage.setItem(`cb-cookiesAllowed`, true)
+
+                    localStorage.setItem(
+                        `cb-preferences`,
+                        JSON.stringify(values)
+                    )
                     onPreferencesSave && onPreferencesSave(values)
                 }
             })

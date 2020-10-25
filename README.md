@@ -2,6 +2,8 @@
 
 The Arcspire Cookie Banner provides an easy and customisable way to get cookie consent from visitors on your site.
 
+![/example.png](./example.png)
+
 ## Getting Started
 
 1. Get the script... **TODO**
