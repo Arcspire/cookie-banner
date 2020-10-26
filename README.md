@@ -6,15 +6,13 @@ The Arcspire Cookie Banner provides an easy and customisable way to get cookie c
 
 ## Getting Started
 
-1. Get the script... **TODO**
-
-2. Place script at the bottom of your `<body>`.
+1. Place the following script at the bottom of your `<body>`.
 
 ```html
-<script src="path/to/cookie-banner.min.js"></script>
+<script src="https://public.arcspire.io/js/cookie-banner_v0.1.0.min.js"></script>
 ```
 
-3. To initialise, just call the function `cookieBanner()` with options if needed.
+2. To initialise, just call the function `cookieBanner()` with options if needed.
 
 ```js
 // default
