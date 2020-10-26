@@ -1,0 +1,14 @@
+{
+    "name": "site",
+    "version": "1.0.0",
+    "main": "index.js",
+    "license": "MIT",
+    "scripts": {
+        "start": "browser-sync start --server --watch"
+        
+    },
+    "devDependencies": {
+        "browser-sync": "^2.26.13",
+        "http-server": "^0.12.3"
+    }
+}
