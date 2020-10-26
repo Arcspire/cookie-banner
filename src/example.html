@@ -9,6 +9,7 @@
       html {
         background-color: lightblue;
         height: 500vh;
+        font-family: monospace;
       }
 
       .my-cookie-banner #cb-banner {
@@ -28,7 +29,10 @@
 
     <script>
       cookieBanner({
-          preferences: [{label: `Marketing`, name: `marketing`}, {label: `Advertising`, name: `advertising`}]
+          preferences: [{label: `Marketing`, name: `marketing`}, {label: `Advertising`, name: `advertising`}],
+          onAccept: () => {
+              console.log("cookies accepted");
+          }
       });
     </script>
   </body>

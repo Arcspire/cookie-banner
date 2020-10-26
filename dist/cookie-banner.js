@@ -52,8 +52,7 @@
     preferencesText: "Preferences",
     overlayTheme: "dark",
     bannerTheme: "light",
-    preferencesSaveText: "Save",
-    useLocalStorage: true
+    preferencesSaveText: "Save"
   };
 
   var cookieBanner = function cookieBanner() {
@@ -74,8 +73,6 @@
         bannerTheme = _ref$bannerTheme === void 0 ? defaultOptions.bannerTheme : _ref$bannerTheme,
         _ref$preferencesSaveT = _ref.preferencesSaveText,
         preferencesSaveText = _ref$preferencesSaveT === void 0 ? defaultOptions.preferencesSaveText : _ref$preferencesSaveT,
-        _ref$useLocalStorage = _ref.useLocalStorage,
-        useLocalStorage = _ref$useLocalStorage === void 0 ? defaultOptions.useLocalStorage : _ref$useLocalStorage,
         title = _ref.title,
         onAccept = _ref.onAccept,
         onReject = _ref.onReject,
@@ -85,25 +82,27 @@
         preferences = _ref.preferences,
         onPreferencesSave = _ref.onPreferencesSave;
 
-    var storage = !useLocalStorage ? sessionStorage : localStorage;
-    var cookiesAllowed = storage.getItem("cb-cookiesAllowed") === "true";
-    var cookiePreferences = JSON.parse(storage.getItem("cb-preferences")); // if cookies have already been allowed, no need to render banner
+    var cookiesAccepted = localStorage.getItem("cb-cookiesAccepted") === "true";
+    var cookiesRejected = sessionStorage.getItem("cb-cookiesRejected") === "true";
+    var cookiePreferences = JSON.parse(localStorage.getItem("cb-preferences") || sessionStorage.getItem("cb-preferences"));
+    var showBanner = !(cookiesAccepted || cookiesRejected || cookiePreferences);
 
-    if (!cookiesAllowed) {
+    if (showBanner) {
       var html = "\n                ".concat(parentClass ? "<div class=\"".concat(parentClass, "\">") : "", "\n                ").concat(fullScreen ? "<div id=\"cb-overlay\" class=\"cb-".concat(overlayTheme, "\">") : "", "\n                <div id=\"cb-banner\" class=\"cb-").concat(bannerTheme, "\">\n                    <div>\n                        ").concat(title ? "<h2 id=\"cb-title\">".concat(title, "</h2>") : "", "\n                        <p id=\"cb-text\">").concat(text, "</p>\n                        ").concat(preferences ? "\n                                <form id='cb-preferences-checkboxes'>\n                                    ".concat(preferences.map(function (p) {
-        return "<label>\n                                        <input type=\"checkbox\" name=\"".concat(p.name, "\" ").concat(cookiePreferences && cookiePreferences[p.name] ? "checked" : "", " />\n                                        <span style=\"vertical-align: text-bottom;\">").concat(p.label, "</span>\n                                    </label>");
+        return "<label>\n                                        <input type=\"checkbox\" name=\"".concat(p.name, "\" ").concat(cookiePreferences && cookiePreferences[p.name] ? "checked" : "", " />\n                                        <span>").concat(p.label, "</span>\n                                    </label>");
       }).join(""), "\n                                </form>\n                            ") : "", "\n                        </div>\n                    <div id=\"cb-buttons\">\n                        <button id=\"cb-accept\">").concat(acceptText, "</button>\n                        <button id=\"cb-reject\">").concat(rejectText, "</button>\n                        ").concat(onMore ? "<button id=\"cb-more\">".concat(moreText, "</button>") : "", "\n                        ").concat(preferences ? "<button id=\"cb-preferences\">".concat(preferencesText, "</button>") : "", "\n                    </div>\n                </div>\n                ").concat(fullScreen ? "</div>" : "", "\n                ").concat(parentClass ? "</div>" : "", "\n            ");
       var div = document.querySelector("body");
       div.insertAdjacentHTML("beforeend", html);
       var acceptButton = document.getElementById("cb-accept");
       acceptButton.addEventListener("click", function () {
         removeBanner(fullScreen);
-        storage.setItem("cb-cookiesAllowed", true);
+        localStorage.setItem("cb-cookiesAccepted", true);
         onAccept && onAccept();
       });
       var rejectButton = document.getElementById("cb-reject");
       rejectButton.addEventListener("click", function () {
         removeBanner(fullScreen);
+        sessionStorage.setItem("cb-cookiesRejected", true);
         onReject && onReject();
       });
 
@@ -125,10 +124,11 @@
             preferencesButton.textContent = preferencesSaveText;
           } else {
             var values = {};
+            var storage = sessionStorage;
             preferences.forEach(function (p) {
               var checked = preferencesCheckboxes.elements[p.name].checked;
               values[p.name] = checked;
-              checked && storage.setItem("cb-cookiesAllowed", true);
+              if (checked) storage = localStorage;
             });
             removeBanner(fullScreen);
             storage.setItem("cb-preferences", JSON.stringify(values));

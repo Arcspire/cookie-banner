@@ -17,7 +17,6 @@ const defaultOptions = {
     overlayTheme: `dark`,
     bannerTheme: `light`,
     preferencesSaveText: `Save`,
-    useLocalStorage: true,
 }
 
 const cookieBanner = ({
@@ -29,7 +28,6 @@ const cookieBanner = ({
     overlayTheme = defaultOptions.overlayTheme,
     bannerTheme = defaultOptions.bannerTheme,
     preferencesSaveText = defaultOptions.preferencesSaveText,
-    useLocalStorage = defaultOptions.useLocalStorage,
     title,
     onAccept,
     onReject,
@@ -39,12 +37,21 @@ const cookieBanner = ({
     preferences,
     onPreferencesSave,
 } = defaultOptions) => {
-    const storage = !useLocalStorage ? sessionStorage : localStorage
-    const cookiesAllowed = storage.getItem(`cb-cookiesAllowed`) === `true`
-    const cookiePreferences = JSON.parse(storage.getItem(`cb-preferences`))
+    const cookiesAccepted =
+        localStorage.getItem(`cb-cookiesAccepted`) === `true`
+    const cookiesRejected =
+        sessionStorage.getItem(`cb-cookiesRejected`) === `true`
+    const cookiePreferences = JSON.parse(
+        localStorage.getItem(`cb-preferences`) ||
+            sessionStorage.getItem(`cb-preferences`)
+    )
+    const showBanner = !(
+        cookiesAccepted ||
+        cookiesRejected ||
+        cookiePreferences
+    )
 
-    // if cookies have already been allowed, no need to render banner
-    if (!cookiesAllowed) {
+    if (showBanner) {
         const html = `
                 ${parentClass ? `<div class="${parentClass}">` : ``}
                 ${
@@ -72,9 +79,7 @@ const cookieBanner = ({
                                                         ? `checked`
                                                         : ``
                                                 } />
-                                        <span style="vertical-align: text-bottom;">${
-                                            p.label
-                                        }</span>
+                                        <span>${p.label}</span>
                                     </label>`
                                         )
                                         .join(``)}
@@ -107,13 +112,14 @@ const cookieBanner = ({
         const acceptButton = document.getElementById(`cb-accept`)
         acceptButton.addEventListener(`click`, () => {
             removeBanner(fullScreen)
-            storage.setItem(`cb-cookiesAllowed`, true)
+            localStorage.setItem(`cb-cookiesAccepted`, true)
             onAccept && onAccept()
         })
 
         const rejectButton = document.getElementById(`cb-reject`)
         rejectButton.addEventListener(`click`, () => {
             removeBanner(fullScreen)
+            sessionStorage.setItem(`cb-cookiesRejected`, true)
             onReject && onReject()
         })
 
@@ -138,13 +144,15 @@ const cookieBanner = ({
                     preferencesButton.textContent = preferencesSaveText
                 } else {
                     const values = {}
+                    let storage = sessionStorage
                     preferences.forEach((p) => {
                         const checked =
                             preferencesCheckboxes.elements[p.name].checked
                         values[p.name] = checked
 
-                        checked && storage.setItem(`cb-cookiesAllowed`, true)
+                        if (checked) storage = localStorage
                     })
+
                     removeBanner(fullScreen)
 
                     storage.setItem(`cb-preferences`, JSON.stringify(values))
