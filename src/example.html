@@ -32,7 +32,14 @@
           preferences: [{label: `Marketing`, name: `marketing`}, {label: `Advertising`, name: `advertising`}],
           onAccept: () => {
               console.log("cookies accepted");
-          }
+          },
+          onReject: () => {
+              console.log("cookies rejected");
+          },
+          onPreferencesSave: (values) => {
+                console.log("values", values)
+         
+          },
       });
     </script>
   </body>

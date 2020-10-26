@@ -160,6 +160,10 @@ const cookieBanner = ({
                 }
             })
         }
+    } else {
+        cookiesAccepted && onAccept()
+        cookiesRejected && onReject()
+        cookiePreferences && onPreferencesSave(cookiePreferences)
     }
 }
 
