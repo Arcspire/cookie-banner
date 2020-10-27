@@ -21,6 +21,7 @@
             sizes="16x16"
             href="/favicon-16x16.png"
         />
+        <script src="https://s3.eu-west-2.amazonaws.com/public.arcspire.io/js/cookie-banner_v0.1.0.min.js"></script>
         <link rel="stylesheet" href="style.css" />
         <script async defer src="https://buttons.github.io/buttons.js"></script>
     </head>
@@ -29,11 +30,11 @@
             <h1>Arcspire Cookie Banner 🍪</h1>
             <div class="gh-buttons">
                 <iframe
-                    src="https://ghbtns.com/github-btn.html?user=Arcspire&repo=cookie-banner&type=star&count=true&size=large"
+                    src="https://ghbtns.com/github-btn.html?user=Arcspire&repo=cookie-banner&type=star&count=true"
                     frameborder="0"
                     scrolling="0"
-                    width="80"
-                    height="30"
+                    width="55"
+                    height="20"
                     title="GitHub"
                 ></iframe>
             </div>
@@ -43,19 +44,91 @@
                 The Arcspire Cookie Banner provides an easy and customisable way
                 to get cookie consent from visitors on your site.
             </p>
+            <p>
+                To get started, read our instructions
+                <a
+                    href="https://github.com/Arcspire/cookie-banner"
+                    target="_blank"
+                    >here</a
+                >.
+            </p>
             <div class="examples">
                 <h2>Examples</h2>
+                <p>
+                    Below are just some examples of the many ways the Arcspire
+                    cookie banner can be used. Click on the buttons above the
+                    snippets of code to see how that example looks!
+                </p>
                 <div class="example">
-                    <button onclick="defaultExample()">Default</button>
+                    <div class="title">
+                        <h3>Default</h3>
+                        <button onclick="defaultExample()">Show</button>
+                    </div>
                     <script src="https://gist.github.com/aaronconway7/16d07df09fa60fe05011b08912aac009.js"></script>
                 </div>
                 <div class="example">
-                    <button onclick="fullScreenExample()">Full Screen</button>
+                    <div class="title">
+                        <h3>On Accept/Reject</h3>
+                        <button onclick="onAcceptRejectExample()">Show</button>
+                    </div>
+                    <script src="https://gist.github.com/aaronconway7/75a45f5c3e548e697143a4bbe90b09c7.js"></script>
+                </div>
+                <div class="example">
+                    <div class="title">
+                        <h3>More Info</h3>
+                        <button onclick="moreExample()">Show</button>
+                    </div>
+                    <script src="https://gist.github.com/aaronconway7/c0ab9e22eab356d83c129d4f0f3cc4f3.js"></script>
+                </div>
+                <div class="example">
+                    <div class="title">
+                        <h3>Full Screen</h3>
+                        <button onclick="fullScreenExample()">Show</button>
+                    </div>
                     <script src="https://gist.github.com/aaronconway7/674b5ef7ece86024ac3a63decada7864.js"></script>
+                </div>
+                <div class="example">
+                    <div class="title">
+                        <h3>Custom Text</h3>
+                        <button onclick="textExample()">Show</button>
+                    </div>
+                    <script src="https://gist.github.com/aaronconway7/8cd465cd04506799445cdc282c19a874.js"></script>
+                </div>
+                <div class="example">
+                    <div class="title">
+                        <h3>Preferences</h3>
+                        <button onclick="preferencesExample()">Show</button>
+                    </div>
+                    <script src="https://gist.github.com/aaronconway7/2eefe8f53a0897431e59fcbe3c62b62e.js"></script>
+                </div>
+                <div class="example">
+                    <div class="title">
+                        <h3>Dark Mode</h3>
+                        <button onclick="darkModeExample()">Show</button>
+                    </div>
+                    <script src="https://gist.github.com/aaronconway7/59bd0c4170d91ad77215b490504de871.js"></script>
+                </div>
+                <div class="example">
+                    <div class="title">
+                        <h3>Custom CSS</h3>
+                        <button onclick="customCssExample()">Show</button>
+                    </div>
+                    <script src="https://gist.github.com/aaronconway7/d1d76519f2671133a164581be9121b4e.js"></script>
+                    <script src="https://gist.github.com/aaronconway7/074024644b52ca169b9224d75d5c6edb.js"></script>
                 </div>
             </div>
         </main>
-        <script src="https://s3.eu-west-2.amazonaws.com/public.arcspire.io/js/cookie-banner_v0.1.0.min.js"></script>
+        <footer>
+            <p>
+                Created by <a href="https://arcspire.io">Arcspire</a> |
+                <a
+                    href="https://github.com/Arcspire/cookie-banner/blob/master/LICENSE.txt"
+                    target="_blank"
+                    >MIT</a
+                >
+                License
+            </p>
+        </footer>
         <script src="script.js"></script>
     </body>
 </html>

@@ -4,9 +4,13 @@ The Arcspire Cookie Banner provides an easy and customisable way to get cookie c
 
 ![/example.png](./example.png)
 
+## Demo
+
+If you'd like to see the banner in action and some of the different ways it can be customised to suit your needs, you can do so [here](https://arcspire.github.io/cookie-banner/).
+
 ## Getting Started
 
-1. Place the following script at the bottom of your `<body>`.
+1. Place the following script at the bottom of your `<body>` or if you are going to alter the styling of the banner place it above your css in your `<head>`.
 
 ```html
 <script src="https://public.arcspire.io/js/cookie-banner_v0.1.0.min.js"></script>
@@ -72,3 +76,7 @@ cookieBanner({
     color: white;
 }
 ```
+
+## License
+
+[MIT](https://github.com/Arcspire/cookie-banner/blob/master/LICENSE.txt)

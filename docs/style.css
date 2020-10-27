@@ -1,5 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap');
 
+:root {
+    --orange: rgb(238, 119, 82);
+    --pink: rgb(231, 60, 126);
+    --blue: rgb(35, 166, 213);
+    --green: rgb(35, 213, 171);
+    --gradient-bg: rgba(0, 0, 0, 0)
+        linear-gradient(
+            -45deg,
+            var(--orange),
+            var(--pink),
+            var(--blue),
+            var(--green)
+        )
+        repeat scroll 0% 0% / 400% 400%;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -25,17 +41,10 @@ html {
 header {
     padding: 75px 50px;
     text-align: center;
-    background: rgba(0, 0, 0, 0)
-        linear-gradient(
-            -45deg,
-            rgb(238, 119, 82),
-            rgb(231, 60, 126),
-            rgb(35, 166, 213),
-            rgb(35, 213, 171)
-        )
-        repeat scroll 0% 0% / 400% 400%;
+    background: var(--gradient-bg);
     color: white;
-    /* box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.25); */
+    border-bottom: 2px solid white;
+    box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.25);
     animation: Gradient 15s ease infinite;
 }
 
@@ -52,6 +61,8 @@ main {
     width: 80%;
     max-width: 800px;
     margin: 0 auto;
+    display: grid;
+    grid-gap: 2em;
 }
 
 p {
@@ -59,7 +70,7 @@ p {
 }
 
 .examples {
-    margin: 50px 0px;
+    /* margin-top: 50px; */
     display: grid;
     grid-gap: 25px;
 }
@@ -69,9 +80,18 @@ p {
     grid-gap: 10px;
 }
 
+.example .title {
+    display: grid;
+    grid-template-columns: max-content auto;
+    align-items: center;
+    grid-gap: 10px;
+}
+
 .example button {
-    padding: 1em 2em;
-    border-radius: 0.5em;
+    padding: 0.75em 2em;
+    border-radius: 0.75em;
+    background: var(--gradient-bg);
+    color: white;
     box-shadow: 0px 4px 10px -5px rgba(0, 0, 0, 0.5);
     outline: none;
     border: 2px solid white;
@@ -79,4 +99,57 @@ p {
     font-size: 0.8rem;
     display: inline-block;
     cursor: pointer;
+    transition: box-shadow 0.2s ease-out;
+    width: max-content;
+}
+
+.example button:hover {
+    box-shadow: 0px 4px 10px -5px rgba(0, 0, 0, 0.25);
+}
+
+.my-cookie-banner #cb-banner {
+    background-color: #34796c;
+    font-size: 12pt;
+    text-align: center;
+    color: white;
+    font-weight: 700;
+    margin: 0;
+    width: 100%;
+    border-radius: 0px;
+    border-top: 2px solid white;
+    padding: 0px;
+}
+
+.my-cookie-banner #cb-text {
+    padding: 20px;
+}
+
+.my-cookie-banner #cb-buttons {
+    grid-gap: 0px;
+    height: 100%;
+}
+
+.my-cookie-banner #cb-buttons button {
+    border-radius: 0px;
+    background-color: white;
+    border: 1px solid #34796c;
+    text-transform: uppercase;
+    text-decoration: underline;
+    font-weight: 400;
+}
+
+footer {
+    text-align: center;
+    padding: 25px 10px;
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 0.8em;
+}
+
+footer a {
+    text-decoration: underline;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+footer a:hover {
+    color: rgba(0, 0, 0, 0.75);
 }
