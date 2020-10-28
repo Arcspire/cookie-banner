@@ -70,6 +70,7 @@
 #cb-buttons {
     display: grid;
     gap: 0.5rem;
+    height: 100%;
 }
 
 #cb-accept,

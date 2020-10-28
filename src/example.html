@@ -1,46 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Arcspire Cookie Banner</title>
-    <script src="../dist/cookie-banner.min.js"></script>
-    <style>
-      html {
-        background-color: lightblue;
-        height: 500vh;
-        font-family: monospace;
-      }
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Arcspire Cookie Banner</title>
+        <script src="../dist/cookie-banner.min.js"></script>
+        <style>
+            html {
+                background-color: lightblue;
+                height: 500vh;
+                font-family: monospace;
+            }
 
-      .my-cookie-banner #cb-banner {
-        background-color: red;
-        margin: 10px;
-      }
+            .my-cookie-banner #cb-banner {
+                background-color: red;
+                margin: 10px;
+            }
 
-      .my-cookie-banner #cb-accept {
-        background-color: red;
-        border: 2px solid black;
-        color: white;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>Cookie Banner</h1>
+            .my-cookie-banner #cb-accept {
+                background-color: red;
+                border: 2px solid black;
+                color: white;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Cookie Banner</h1>
 
-    <script>
-      cookieBanner({
-          preferences: [{label: `Marketing`, name: `marketing`}, {label: `Advertising`, name: `advertising`}],
-          onAccept: () => {
-              console.log("cookies accepted");
-          },
-          onReject: () => {
-              console.log("cookies rejected");
-          },
-          onPreferencesSave: (values) => {
-                console.log("values", values)
-         
-          },
-      });
-    </script>
-  </body>
+        <button onclick="clearStorage()">Clear Storage</button>
+
+        <script>
+            cookieBanner({
+                preferences: [
+                    { label: `Marketing`, name: `marketing` },
+                    { label: `Advertising`, name: `advertising` },
+                ],
+                onAccept: () => {
+                    console.log('cookies accepted')
+                },
+                onReject: () => {
+                    console.log('cookies rejected')
+                },
+                onPreferencesSave: (values) => {
+                    console.log('values', values)
+                },
+            })
+
+            function clearStorage() {
+                sessionStorage.removeItem('cb-cookiesAccepted')
+                sessionStorage.removeItem('cb-cookiesRejected')
+                sessionStorage.removeItem('cb-preferences')
+
+                localStorage.removeItem('cb-cookiesAccepted')
+                localStorage.removeItem('cb-cookiesRejected')
+                localStorage.removeItem('cb-preferences')
+            }
+        </script>
+    </body>
 </html>

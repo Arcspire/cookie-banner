@@ -161,9 +161,11 @@ const cookieBanner = ({
             })
         }
     } else {
-        cookiesAccepted && onAccept()
-        cookiesRejected && onReject()
-        cookiePreferences && onPreferencesSave(cookiePreferences)
+        cookiesAccepted && onAccept && onAccept()
+        cookiesRejected && onReject && onReject()
+        cookiePreferences &&
+            onPreferencesSave &&
+            onPreferencesSave(cookiePreferences)
     }
 }
 
