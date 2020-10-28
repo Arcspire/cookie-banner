@@ -77,6 +77,10 @@ cookieBanner({
 }
 ```
 
+## Examples
+
+-   [Arcspire](https://arcspire.io)
+
 ## License
 
 [MIT](https://github.com/Arcspire/cookie-banner/blob/master/LICENSE.txt)
